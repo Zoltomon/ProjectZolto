@@ -1,0 +1,112 @@
+﻿<Page x:Class="AutoZolto.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AutoZolto.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="2"
+                Background="Red"
+                Width="200"
+                Style="{DynamicResource RoundedButtonStyle}"
+                Content="Выход"
+                Click="BtnExit_Click"
+                Name="BtnExit"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="250">
+            <TextBlock Text="Быстрая сортировка" FontSize="14"/>
+            <ComboBox Name="CmbFil" Margin="2" HorizontalContentAlignment="Stretch">
+                <ComboBoxItem>
+                    <Button Content="Активные пользователи"
+                            Name="BtnActivUser"
+                            HorizontalAlignment="Stretch"
+                            Click="BtnActivUser_Click"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Button Content="Неактивные пользователи"
+                            Name="BtnNotActivUser"
+                            HorizontalAlignment="Stretch"
+                            Click="BtnNotActivUser_Click"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Button Content="Админы"
+                            Name="BtnAdmin"
+                            HorizontalAlignment="Stretch"
+                            Click="BtnAdmin_Click"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Button Content="Пользователи"
+                            Name="BtnUser"
+                            HorizontalAlignment="Stretch"
+                            Click="BtnUser_Click"/>
+                </ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="2"
+                Background="GreenYellow"
+                Width="200"
+                Style="{DynamicResource RoundedButtonStyle}"
+                Content="Добавить пользователя"
+                Click="BtnPostUser_Click"
+                Name="BtnPostUser"/>
+        </StackPanel>
+        <DataGrid
+            CanUserAddRows="False"
+            Margin="2"
+            Grid.Row="1"
+            Name="DataGridUser"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Имя" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="Имя" Binding="{Binding Surname}"/>
+                <DataGridTextColumn Width="*" Header="Имя" Binding="{Binding Patronomic}"/>
+                <DataGridTextColumn Width="*" Header="Логин" Binding="{Binding User.Login}"/>
+                <DataGridTextColumn Width="*" Header="Роль" Binding="{Binding User.Role.NameRole}"/>
+                <DataGridTextColumn Width="*" Header="Статус" Binding="{Binding User.Status.NameStatus}"/>
+                <DataGridTemplateColumn Width="*"
+                                        Visibility="Collapsed"
+                                        Header="Действие">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Click="BtnStatusBad_Click"
+                                Name="BtnStatusBad"
+                                Content="Заблокировать"
+                                Style="{DynamicResource RoundedButtonStyle}"
+                                />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Visibility="Collapsed"
+                    Width="*" Header="Активировать">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Name="BtnStatusActivate"
+                                Content="Разблокировать"
+                                Style="{DynamicResource RoundedButtonStyle}"
+                                Click="BtnStatusActivate_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
